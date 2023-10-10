@@ -14,18 +14,20 @@ class Home(LoginRequiredMixin,TemplateView):
     template_name = 'easysign/index.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        
-        configuration = Configuration(username=settings.DROPBOX_API_KEY)
-        with ApiClient(configuration) as api_client:
-            signature_request_api = apis.SignatureRequestApi(api_client)
-            try:
-                response = signature_request_api.signature_request_list()
-                res = response.to_dict()
-                documents = [(x["signature_request_id"], x["title"], x["signing_url"]) for x in res["signature_requests"]]
-            except ApiException as e:
-                print("Exception when calling Dropbox Sign API: %s\n" % e)
-        context['documents'] = documents
-        
+        context["no_key"] = True
+        if self.request.user.user_api_key:
+            configuration = Configuration(username=self.request.user.user_api_key)
+            with ApiClient(configuration) as api_client:
+                signature_request_api = apis.SignatureRequestApi(api_client)
+                try:
+                    response = signature_request_api.signature_request_list()
+                    res = response.to_dict()
+                    documents = [(x["signature_request_id"], x["title"], x["signing_url"]) for x in res["signature_requests"]]
+                except ApiException as e:
+                    print("Exception when calling Dropbox Sign API: %s\n" % e)
+            context['documents'] = documents
+            context["no_key"] = False
+
         return context
 
 class UserCreate(CreateView):
@@ -45,7 +47,7 @@ def process_doc(request, doc_id):
         doc = Document.objects.get(doc_id=doc_id)
     except :
 
-        configuration = Configuration(username=settings.DROPBOX_API_KEY)
+        configuration = Configuration(username=self.request.user.user_api_key)
 
         with ApiClient(configuration) as api_client:
             signature_request_api = apis.SignatureRequestApi(api_client)
