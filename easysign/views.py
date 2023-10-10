@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.views.generic import CreateView, TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserChangeForm
-from .models import User, Document 
+from .forms import CustomUserChangeForm, CustomUserCreateForm
+from .models import Document 
+from django.contrib.auth import get_user_model
 from django.conf import settings
 from dropbox_sign import Configuration, ApiClient, ApiException, apis
 import openai
@@ -31,13 +32,13 @@ class Home(LoginRequiredMixin,TemplateView):
         return context
 
 class UserCreate(CreateView):
-    model = User
-    form_class = UserCreationForm
+    model = get_user_model()
+    form_class = CustomUserCreateForm
     template_name = 'registration/usercreation_form.html'
     success_url = '/'
 
 class UserEdit(UpdateView):
-    model = User
+    model = get_user_model()
     form_class = CustomUserChangeForm
     template_name = "registration/userupdate_form.html"
     success_url = '/'
@@ -47,7 +48,7 @@ def process_doc(request, doc_id):
         doc = Document.objects.get(doc_id=doc_id)
     except :
 
-        configuration = Configuration(username=self.request.user.user_api_key)
+        configuration = Configuration(username=request.user.user_api_key)
 
         with ApiClient(configuration) as api_client:
             signature_request_api = apis.SignatureRequestApi(api_client)

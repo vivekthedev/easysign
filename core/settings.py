@@ -27,7 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 SECRET_KEY = os.environ['DJAGNO_SECRET_KEY']
 OPEN_AI_KEY = os.environ['OPENAI_API_KEY']
-DROPBOX_API_KEY = os.environ['DROPBOX_API_KEY']
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -126,12 +125,12 @@ STATICFILES_DIRS=[
     BASE_DIR / 'static'
 ]
 
+AUTH_USER_MODEL = 'easysign.CustomUser'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'easysign.User'
 
 LOGIN_URL = 'login/'
 

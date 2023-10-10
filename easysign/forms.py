@@ -1,5 +1,6 @@
 from django import forms
-from .models import User
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 
 class CustomUserChangeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -9,10 +10,14 @@ class CustomUserChangeForm(forms.ModelForm):
             field.help_text = ''
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('first_name', 'last_name', 'email', 'username', 'user_api_key',)
 
         widgets = {
             'user_api_key': forms.TextInput(attrs={'type': 'password'}),
         }
-        
+
+class CustomUserCreateForm(UserCreationForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('username', 'first_name', 'last_name', 'password')
