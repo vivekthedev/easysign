@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+Sign Up - EasySign
+{% endblock title %}
+{% block content %}
+
+<div class="container-form">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center" style="color: #4D90FF; font-size:3em"> Sign Up</h1>
+            <form method="post" class="form-login">
+                {% csrf_token %}
+                <label for="username">Username</label>{{form.username}}
+                <label for="username">Password</label>{{form.password1}}
+                <label for="username">Password Confirmation</label>{{form.password2}}
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

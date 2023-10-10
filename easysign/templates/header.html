@@ -1,0 +1,24 @@
+<nav class="navbar bg-body-tertiary">
+    <a class="navbar-brand" href="{% url 'home' %}">EasySign</a>
+    {% if request.user.is_authenticated %}
+    <div class="d-flex">
+        <a href="{% url 'logout' %}">
+            <button class="btn btn-success mx-4">Sign Out</button>
+        </a>
+        <a href="{% url 'update' request.user.id %}">
+            <button class="btn btn-success">Configure Account</button>
+        </a>
+    </div>
+    {% else %}
+    <div class="d-flex">
+        <a href="{% url 'signup' %}">
+
+            <button class="btn btn-success mx-4">Sign Up</button>
+        </a>
+        <a href="{% url 'login' %}">
+
+            <button class="btn btn-success">Log In</button>
+        </a>
+    </div>
+    {% endif %}
+</nav>

@@ -1,0 +1,157 @@
+/* font-family: 'Josefin Sans',
+sans-serif;
+font-family: 'Young Serif',
+serif; */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.warning {
+    font-size: 23px;
+    width: 50vw;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 0, 0, 0.9);
+    border: 0px solid;
+    border-radius: 13px;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+body {
+    background-color: #EEEFE9;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+form input[type="button"] {
+    font-family: 'Josefin Sans', sans-serif;
+
+}
+
+.navbar {
+    width: 100vw;
+    background-color: #4D90FF;
+    height: 4em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    font-size: 32px;
+    margin: 14px;
+    color: white;
+    padding: 12px;
+}
+
+.container-form {
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+    padding: 12px;
+    border: none;
+
+}
+
+.heading {
+    color: #4D90FF;
+    font-size: 3em;
+    margin: 10px;
+}
+
+.heading-1 {
+    font-size: 2em;
+    margin: 10px;
+}
+
+.row {
+    width: 50vw;
+    margin: auto;
+}
+
+.card-body {
+    font-size: larger;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    gap: 20px
+}
+
+.btn {
+    color: white;
+    background-color: rgba(247, 165, 1);
+    border: none;
+    padding: 12px;
+    font-family: 'Young Serif', serif;
+    margin: 14px;
+    cursor: pointer;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+.container-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.container_docs {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    border: 1px solid #4D90FF;
+    padding: 12px;
+}
+
+.htmx-indicator {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}
+
+.htmx-request .htmx-indicator {
+    opacity: 1
+}
+
+.htmx-request.htmx-indicator {
+    opacity: 1
+}
+
+.container_docs {
+    display: flex;
+    font-size: 14px;
+    flex-direction: row;
+}
+
+.left_side {
+    flex: 1;
+    padding: 10px;
+}
+
+.right_side {
+    flex: 1;
+    padding: 10px;
+    overflow: scroll;
+}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+Welcome to EasySign
+{% endblock title %}
+{% block content %}
+{% if no_key %}
+<div class="warning">
+    Please add your Dropbox API on Configure Account Section in order to fetch documents
+</div>
+{% endif %}
+<div class="row">
+    <p class="heading">Hello {{ request.user.get_full_name }}</p>
+    <p class="heading-1">Review your signature requests</p>
+    <div class="container-card">
+
+        {% for item in documents %}
+        <div class="d-block card col-md-4 col-12 my-3">
+            <div class="card-body py-2">
+                <strong> {{item.1}}</strong>
+
+            </div>
+            <a href="{% url 'document' item.0 %}">
+                <input type="button" value="View Document" class="btn btn-success">
+            </a>
+            <a href=" {{item.2}}">
+                <input type="button" value="Sign Document" class="btn btn-success">
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}

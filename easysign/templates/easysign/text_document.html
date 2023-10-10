@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Process your Document
+{% endblock title %}
+{% block content %}
+
+<h2 style="
+    padding: 12px;
+">Document Content</h2>
+<div>
+    <input type="button" value="Translate in Hindi" class="btn btn-primary" hx-get="{% url 'get_text' 0 doc.doc_id %}"
+        hx-target=".target" hx-indicator="#spinner">
+    <input type="button" value="Translate in Spanish" class="btn btn-primary" hx-get="{% url 'get_text' 1 doc.doc_id %}"
+        hx-target=".target" hx-indicator="#spinner">
+    <input type="button" value="Translate in Chinese" class="btn btn-primary" hx-get="{% url 'get_text' 2 doc.doc_id %}"
+        hx-target=".target" hx-indicator="#spinner">
+    <input type="button" value="Summarize Content" class="btn btn-primary" hx-get="{% url 'get_text' 3 doc.doc_id %}"
+        hx-target=".target" hx-indicator="#spinner">
+
+</div>
+<div class="container_docs">
+    <div class="left_side">
+
+        <pre width="100%">
+            {{doc.original_content}}
+        </pre>
+    </div>
+    <div class="right_side">
+
+        <pre class="target" width="100%">
+            <img id="spinner" class="htmx-indicator" src="{% static 'img/Blocks-1s-200px.svg' %}" />
+        </pre>
+    </div>
+</div>
+{% endblock content %}
